@@ -1,67 +1,58 @@
-.\" Manpage for printf.
-.\" Contact 1096@holbertonschool.com or
-1149@holbertonschool.com to correct errors.
-.TH _printf 3 "28 October 2019" "1.0" "Printf Program Manual"
+.TH man 3 "05 OCT 2021" "0.10" "_printf man page"
 .SH NAME
- _printf - function made by Holberton way
- .SH SYNOPSIS
- .BI _printf(const char *format, ...)
- .PP
- .B #include <stdarg.h>
- .PP
- .B int _printf(const char *format, ...);
- .PP
- .B int _putchar(char c);
- .PP
- .B int CharacterCase(va_list arg);
- .PP
- .B int StringCase(va_list arg);
- .PP
- .B int DecimalCase(va_list arg);
- .PP
- .B int IntegerCase(va_list arg);
- .PP
- .B int OctCase(va_list arg);
- .PP
- .B int UnsignedCase(va_list arg);
- .PP
- .B int BinaryCase(va_list arg);
- .PP
- .SH DESCRIPTION
- printf function produces output according to a format as described below.PP
- .PP
- .SH Format .br
- .br
- .PP
- The function takes parameters to generate the output, first character case that
- invoques the function to define the process to do, in this case represents the
- data type to print in console; the next is one or more parameters,
- they are variable names. Then, call the corresponding function for each case
- (char, string, integer, float, double, hex)
- .br
- .SH Format specifiers
- .TP
- .B c
- .R prints a single character.
- .TP
- .B s
- .R prints a string teating it like a array of characters.
- .TP
- .B d
- .R prints a decimal number an also a big integer.
- .TP
- .B i
- .R prints an integer number.
- .TP
- .B o
- .R converts a number in octal and then print it.
- .TP
- .B u
- .R prints the unsigned case.
- .TP
- .B b
- .R converts a number in a binary and then print it.
- .SH SEE ALSO
- .R printf(3) printf
- .SH BUGS
- 
+.B _printf
+- Formatted output conversion.
+.SH SYNOPSIS
+.B #include "main.h"
+
+.B int _printf(const char *
+.I format
+.B , ...)
+.SH DESCRIPTION
+.B _printf()
+Prints to standard output under the control of a
+.I format
+string that specifies how subsequent arguments are converted for output.
+.SH Return value
+On successful return, these functions return the number of characters printed, excluding the null byte used to end output to strings.
+
+If an output error is encountered, a negative value is returned.
+.SH Format of the format string
+The format string is composed of 0 or more directives (ordinary characters that are not %), which are copied to the output stream. The format string is also composed of conversion specifications, each of which result in fetching zero or more subsequent arguments. Each conversion specification is introduced by the character % and ends with the conversion specifier.
+The argument must correspond properly with the conversion specifier. By default, the arguments are used in the order given.
+.SH The conversion specifier
+A character that specifies the type of conversion to be applied. The conversion specifiers and their meanings are:
+.TP
+.BR c
+The int argument is converted to an unsigned char, then the resulting character is written
+.TP
+.B s
+The const char * argument is expected to be a pointer to an array of character type (pointer to a string). Characters from the array are written up to a terminating null byte, but do ot include the terminating null byte.
+.TP
+.B S
+Prints a string. Non printable characters are printed as "\x" followed by their ASCII values in two digit hexadecimal
+.TP
+.B d, i
+The int argument is converted to signed decimal notation.
+.TP
+.B x, X
+The unsigned int argument is converted to unsigned lowercase hexadecimal notation(x), or unsigned uppercase hexadecimal notation(X).
+.TP
+.B u
+The unsigned int argument is converted to unsigned decimal notation
+.TP
+.B o, b
+The unsigned int argument is converted to unsigned octal notation(o) or binary notation(b).
+.TP
+.B p
+Address is printed in hexadecimal.
+.TP
+.B r
+Prints a string in reverse.
+.TP
+.B R
+Prints a string converted to rot13
+.TP
+.B %
+A '%' is written but no argument is converted. The complete version specification is '%%'
+
