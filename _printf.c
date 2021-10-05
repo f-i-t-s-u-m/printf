@@ -55,13 +55,13 @@ int _printf(const char *format, ...)
 			{
 				case 'c':
 					t(va_arg(list, int), &count);
-					break;
+					continue;
 				case 's':
 					_putstring(va_arg(list, char *), &count);
-					break;
+					continue;
 				case '%':
 					t('%', &count);
-					break;
+					continue;
 			}
 
 		}
