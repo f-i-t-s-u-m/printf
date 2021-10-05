@@ -39,10 +39,10 @@ int _printf(const char *format, ...)
 	va_list list;
 	int count = 0;
 
-	int i = 0, (*t)(char, int *) = &_putchar;
+	int i, (*t)(char, int *) = &_putchar;
 
 	va_start(list, format);
-	for (; format[i]; i++)
+	for (i = 0; format[i]; i++)
 	{
 		if (format[i] != '%')
 		{
