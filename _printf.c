@@ -1,71 +1,85 @@
 #include "main.h"
+
+
+
 /**
- *_putchar - print chars to the screen
- *@c: char arg to the print function
- *@p: pointer to get the value of printed chars
- *Return: integer
+ * check_for_specifiers - checks if there is a valid format specifier
+ * @format: possible format specifier
+ *
+ * Return: pointer to valid function or NULL
  */
-
-int _putchar(char c, int *p)
+static int (*check_for_specifiers(const char *format))(va_list)
 {
-	if (c != '\0')
-	*p = *p + 1;
-	return (write(1, &c, 1));
-}
-/**
- *_putstring - print chars to the screen
- *@str: string arg to the print function
- *@pc: pointer to get the value of printed chars
- *Return: integer;
- */
+	unsigned int i;
+	print_t p[] = {
+		{"c", print_c},
+		{"s", print_s},
+		{"i", print_i},
+		{"d", print_d},
+		{"u", print_u},
+		{"b", print_b},
+		{"o", print_o},
+		{"x", print_x},
+		{"X", print_X},
+		{"p", print_p},
+		{"S", print_S},
+		{"r", print_r},
+		{"R", print_R},
+		{NULL, NULL}
+	};
 
-int _putstring(char *str, int *pc)
-{
-	int i = 0;
-
-	for (i = 0; str[i]; i++)
+	for (i = 0; p[i].t != NULL; i++)
 	{
-		_putchar(str[i], pc);
+		if (*(p[i].t) == *format)
+		{
+			break;
+		}
 	}
-	return (i);
+	return (p[i].f);
+
 }
+
 /**
- *_printf - print function
- *@format: printer format
- *Return: integer;
+ * _printf - prints anything
+ * @format: list of argument types passed to the function
+ *
+ * Return: number of characters printed
  */
 int _printf(const char *format, ...)
 {
-	va_list list;
-	int count = 0;
+	unsigned int i = 0, count = 0;
+	va_list valist;
+	int (*f)(va_list);
 
-	int i, (*t)(char, int *) = &_putchar;
+	if (format == NULL)
+		return (-1);
 
-	va_start(list, format);
-	for (i = 0; format[i]; i++)
+	va_start(valist, format);
+	while (format[i])
 	{
-		if (format[i] != '%')
+		for (; format[i] != '%' && format[i]; i++)
 		{
-			t(format[i], &count);
+			_putchar(format[i]);
+			count++;
 		}
+		if (!format[i])
+			return (count);
+		f = check_for_specifiers(&format[i + 1]);
+		if (f != NULL)
+		{
+			count += f(valist);
+			i += 2;
+			continue;
+		}
+		if (!format[i + 1])
+			return (-1);
+		_putchar(format[i]);
+		count++;
+		if (format[i + 1] == '%')
+			i += 2;
 		else
-		{
 			i++;
-			switch (format[i])
-			{
-				case 'c':
-					t(va_arg(list, int), &count);
-					continue;
-				case 's':
-					_putstring(va_arg(list, char *), &count);
-					continue;
-				case '%':
-					t('%', &count);
-					continue;
-			}
-
-		}
 	}
-	va_end(list);
+	va_end(valist);
 	return (count);
 }
