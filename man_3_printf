@@ -1,29 +1,33 @@
-.TH man 3
+.TH _PRINTF 3 "OCT 05, 2021" "Version 1.0" "_printf man page"
 .SH NAME
-.B _printf
-- A simple re-creation of the printf function
+_printf
 .SH SYNOPSIS
-To use this function the #include "holberton.h" header is needed.
-.SH DESCRIPTION
-The _printf() function produces output according to a format which is described
-below. This function write its output to the stdout, the standard output stream.
-.SH USAGE
-To use _printf you have to use the following key characters preceeded by % symbol.
-.RS 3
-%c: To be used to print characters
-.RS 0
-%s: To be used to print strings
-.RS 0
-%d: To print integers of max and min size of an int type
-.RS 0
-%i: To print integers of max and min size of an int type
-.RS 0
-%b: To print a number in binary form
-.SH RETURN VALUES
-The _printf() function returns an integer representing the number of symbols
-printed not counting \\0 for the string.
-.SH SEE ALSO
-.I printf(3)
-.SH BUGS
-No known bugs.
+.B #include <main.h>
 
+.B int _printf(const char *format, ...);
+." There are important helper functions prototypes declared in holberton.h
+." that was not mentioned here to reduce redundancy and since _printf is our focus.
+
+.SH DESCRIPTION
+.B _printf
+is a replica of the standard printf function. It tries to simulate the same functionalities
+that
+.B printf
+possesses.
+
+." Note:
+.PP
+.B Remember this is just a clone and may not possess all features that printf has.
+This was the first group project we worked on at ALX. And there is one thing it left me
+with; respect for
+.B the standard printf() function.
+
+.SH PARAMETERS
+.TP
+.B format
+string to be parsed based on the presence or absence of specifiers
+.TP
+.IP ...
+This can consist of zero or more passed arguments
+.PP
+.I Remember that printf is a variadic function.
