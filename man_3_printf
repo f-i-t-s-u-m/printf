@@ -1,33 +1,20 @@
-.TH _PRINTF 3 "OCT 05, 2021" "Version 1.0" "_printf man page"
+.TH "man" 3 "05 oct 2021" "0.01" "_printf man page"
 .SH NAME
-_printf
+_printf -- formatted output
 .SH SYNOPSIS
-.B #include <main.h>
-
-.B int _printf(const char *format, ...);
-." There are important helper functions prototypes declared in holberton.h
-." that was not mentioned here to reduce redundancy and since _printf is our focus.
-
+_printf format [arguments, ...]
 .SH DESCRIPTION
-.B _printf
-is a replica of the standard printf function. It tries to simulate the same functionalities
-that
-.B printf
-possesses.
-
-." Note:
-.PP
-.B Remember this is just a clone and may not possess all features that printf has.
-This was the first group project we worked on at ALX. And there is one thing it left me
-with; respect for
-.B the standard printf() function.
-
-.SH PARAMETERS
-.TP
-.B format
-string to be parsed based on the presence or absence of specifiers
-.TP
-.IP ...
-This can consist of zero or more passed arguments
-.PP
-.I Remember that printf is a variadic function.
+Our custom _printf utility formats and prints its arguments using the format string.
+The format string is a character string which contains specifiers and flags
+_printf parses the format string and replaces specifiers with variadic arguments.
+.SH RETURN VALUE
+The _printf utility returns the number of bytes written on success, and -1 on failure.
+.SH SEE ALSO
+.I 
+builtin(1), echo(1), sh(1), printf(3)
+.SH BUGS
+No known bugs
+.SH IMPROVEMENTS
+Implement width, percision, length specifiers for integers, and the other flags '-' & '0'
+.SH AUTHOR
+fitsum belay, mathyas
